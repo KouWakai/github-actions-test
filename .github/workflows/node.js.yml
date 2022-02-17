@@ -2,7 +2,8 @@ on:
   push:
 
 jobs:
-  sample:
+  build-n-push:
+    if: github.repository == ${GITHUB_REF#refs/heads/}
     runs-on: ubuntu-latest
     steps:
       - run: echo "${GITHUB_REF#refs/heads/}"
