@@ -29,4 +29,4 @@ jobs:
           echo git add .
           echo git commit -m "Github-actions-test" -a
           echo git pull
-          echo git push origin toJSON(github.ref)
+          echo git push origin master
