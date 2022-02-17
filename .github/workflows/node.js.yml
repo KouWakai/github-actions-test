@@ -1,26 +1,11 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Node.js CI
-
-on: [push]
+on:
+  push:
 
 jobs:
-  build:
+  sample:
     runs-on: ubuntu-latest
-    name: Build and Push
     steps:
-      - name: git-checkout
-        uses: actions/checkout@v2
-        
-      - name: Push
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: toJSON(github.ref)
-          FOLDER: build
-          SSH_PRIVATE_KEY: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE: "Build: ({sha}) {msg}"
-    
-    
-    
+      - run: echo "${GITHUB_REF#refs/heads/}"
+      - run: echo "${GITHUB_REF_CONTEXT#refs/heads/}"
+    env:
+      GITHUB_REF_CONTEXT: ${{ github.ref }}
