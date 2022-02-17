@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    if: contains(github.ref)
+    if: github.repository == github.ref
 
     runs-on: ubuntu-latest
 
