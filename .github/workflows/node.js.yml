@@ -27,7 +27,6 @@ jobs:
     - run: git config --global user.name "KouWakai"
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm test
     - run: git add .
     - run: git commit -m "自動ビルド" -a
     - run: git pull
