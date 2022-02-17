@@ -8,13 +8,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v2
@@ -24,14 +22,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
       env:
-        branch: "${GITHUB_REF#refs/heads/}"
+        BRANCH: "${GITHUB_REF#refs/heads/}"
         MESSAGE: "Build: ({sha}) {msg}"
     - run: |
-        git config --global user.email "kouyama112@gmail.com"
-        git config --global user.name "KouWakai"
         npm ci
         npm run build --if-present
-        git add .
-        git commit -m "自動ビルド" -a
-        git pull
-        git push origin $branch
+    - name: Commit output
+      uses: stefanzweifel/git-auto-commit-action@v4.2.0
+      with:
+        commit_message: $MESSAGE
+        branch: $BRANCH
