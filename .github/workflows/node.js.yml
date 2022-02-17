@@ -8,25 +8,22 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    name: Build and Push
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: |
-          echo git config --global user.email "kouyama112@gmail.com"
-          echo git config --global user.name "KouWakai"
-          echo npm ci
-          echo npm run build --if-present
-          echo npm test
-          echo git add .
-          echo git commit -m "Github-actions-test" -a
-          echo git pull
-          echo git push origin master
+      - name: git-checkout
+        uses: actions/checkout@v2
+        
+      - name: Install all dependencies
+        run: npm install
+        
+      - name: Push
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: toJSON(github.ref)
+          FOLDER: build
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+          MESSAGE: "Build: ({sha}) {msg}"
+    
+    
+    
