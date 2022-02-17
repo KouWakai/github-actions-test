@@ -23,11 +23,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: git config --global user.email "kouyama112@gmail.com"
-    - run: git config --global user.name "KouWakai"
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: git add .
-    - run: git commit -m "自動ビルド" -a
-    - run: git pull
-    - run: git push origin echo "${GITHUB_REF#refs/heads/}"
+      env:
+        branch: "${GITHUB_REF#refs/heads/}"
+    - run: |
+        git config --global user.email "kouyama112@gmail.com"
+        git config --global user.name "KouWakai"
+        npm ci
+        npm run build --if-present
+        git add .
+        git commit -m "自動ビルド" -a
+        git pull
+        git push origin $branch
