@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    if: github.repository == github.ref
+    if: contains(github.event.comment.html_url, 'push')
 
     runs-on: ubuntu-latest
 
