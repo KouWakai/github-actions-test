@@ -15,6 +15,9 @@ jobs:
         
       - name: Install all dependencies
         run: npm install
+      
+      - name: Build
+        run: npm run build
         
       - name: Push
         uses: s0/git-publish-subdir-action@develop
@@ -22,7 +25,7 @@ jobs:
           REPO: self
           BRANCH: toJSON(github.ref)
           FOLDER: build
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Build: ({sha}) {msg}"
     
     
