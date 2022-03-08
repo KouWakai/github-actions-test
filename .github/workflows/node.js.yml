@@ -28,6 +28,8 @@ jobs:
           destination: |
             ./out/common.css
           sourceMap: true
+          sourceMapEmbed: true
+          sourceMapContents: true
           outFile: ./out/common.css
           
       - name: (Test)Check if map exists or not
