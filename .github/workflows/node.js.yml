@@ -29,6 +29,9 @@ jobs:
             /tmp/assets/css/common.css
             /tmp/assets/css/common.css.map
           source_map: true
+          
+      - name: (Test)Check if map exists or not
+        run: ls -a
             
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
