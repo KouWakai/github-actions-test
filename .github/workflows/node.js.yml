@@ -28,11 +28,10 @@ jobs:
           destination: |
             /tmp/assets/css/common.css
           sourceMap: true
-          outFile: common.css
+          outFile: out.css
           
       - name: (Test)Check if map exists or not
         run: |
-          cd src
           ls -a
             
       - name: FTP-Deploy-Action
