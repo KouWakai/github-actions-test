@@ -1,23 +1,20 @@
-name: node js CI
-
+name: sass compile and deply via ftp
 on:
   push:
     branches:
       - sass-compile-deploy
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout source Git branch
         uses: actions/checkout@v2
         with:
             ref: sass-compile-deploy
-
+            fetch-depth: 10
+            submodules: true
       - name: Make destination directory for compiled CSS
         run: mkdir -vp ./out
-
       - name: Compile main.css from main.scss
         uses: gha-utilities/sass-build@v0.4.8
         with:
@@ -25,11 +22,21 @@ jobs:
             src/common.scss
           destination: |
             ./out/common.css
-            ./out/common.css.map
           sourceMap: true
+          sourceMapEmbed: true
           sourceMapContents: true
           outFile: ./out/common.css
-            
+
+      - name: (Test)Check if map exists or not
+        run: |
+          ls -a
+          echo -----------------
+          cd out
+          ls -a
+          cd ..
+          echo -----------------
+          ls -a
+
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
