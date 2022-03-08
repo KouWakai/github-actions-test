@@ -28,6 +28,7 @@ jobs:
           destination: |
             /tmp/assets/css/common.css
           source_map: true
+          source_map_embed: true
             
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
