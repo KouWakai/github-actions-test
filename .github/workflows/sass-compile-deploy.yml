@@ -19,8 +19,8 @@ jobs:
         uses: gha-utilities/sass-build@v0.4.8
         with:
           source: |
-            assets/scss/common.scss
-            assets/scss/editor.scss
+            ./src/common.scss
+            ./src/editor.scss
           destination: |
             ./out/common.css
             ./out/editor.css
