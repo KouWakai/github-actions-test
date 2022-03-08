@@ -26,7 +26,7 @@ jobs:
           source: |
             src/common.scss
           destination: |
-            out/common.css
+            ./out/common.css
           sourceMap: true
           outFile: out.css
           
