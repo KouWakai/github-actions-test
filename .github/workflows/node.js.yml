@@ -27,8 +27,7 @@ jobs:
             src/common.scss
           destination: |
             ./out/common.css
-          sourceMap: true
-          outFile: out.css
+          sourceMap: common.map
           
       - name: (Test)Check if map exists or not
         run: |
@@ -37,6 +36,7 @@ jobs:
           cd out
           ls -a
           cd ..
+          echo -----------------
           ls -a
             
       - name: FTP-Deploy-Action
@@ -45,5 +45,5 @@ jobs:
           server: ${{ secrets.DEV_FTP_SERVER }}
           username: ${{ secrets.DEV_FTP_USERNAME }}
           password: ${{ secrets.DEV_FTP_PASSWORD }}
-          local-dir: ./out
+          local-dir: ./out/
           server-dir: ./scss/output/
