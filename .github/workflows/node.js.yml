@@ -28,7 +28,7 @@ jobs:
           destination: |
             /tmp/assets/css/common.css
           sourceMap: true
-          outfile: common.css.map
+          sourceMapEmbed: true
           
       - name: (Test)Check if map exists or not
         run: |
