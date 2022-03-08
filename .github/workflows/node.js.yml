@@ -36,6 +36,8 @@ jobs:
           echo -----------------
           cd out
           ls -a
+          cd ..
+          ls -a
             
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -43,5 +45,5 @@ jobs:
           server: ${{ secrets.DEV_FTP_SERVER }}
           username: ${{ secrets.DEV_FTP_USERNAME }}
           password: ${{ secrets.DEV_FTP_PASSWORD }}
-          local-dir: /tmp/assets/css/
+          local-dir: ./out
           server-dir: ./scss/output/
