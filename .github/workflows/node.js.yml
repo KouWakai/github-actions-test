@@ -13,9 +13,7 @@ jobs:
       - name: Checkout source Git branch
         uses: actions/checkout@v2
         with:
-            ref: sass-compile-deploy
-            fetch-depth: 10
-            submodules: true
+            ref: sass-compile-deplo
 
       - name: Make destination directory for compiled CSS
         run: mkdir -vp ./out
