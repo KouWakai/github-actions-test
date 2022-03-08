@@ -18,7 +18,7 @@ jobs:
             submodules: true
 
       - name: Make destination directory for compiled CSS
-        run: mkdir -vp /tmp/repo-name/assets/css
+        run: mkdir -vp /tmp/assets/css
 
       - name: Compile main.css from main.scss
         uses: gha-utilities/sass-build@v0.4.8
@@ -26,7 +26,7 @@ jobs:
           source: |
             src/common.scss
           destination: |
-            /tmp/repo-name/assets/css/common.css
+            /tmp/assets/css/common.css
           source_map: true
             
       - name: FTP-Deploy-Action
@@ -35,6 +35,6 @@ jobs:
           server: ${{ secrets.DEV_FTP_SERVER }}
           username: ${{ secrets.DEV_FTP_USERNAME }}
           password: ${{ secrets.DEV_FTP_PASSWORD }}
-          local-dir: ./tmp/repo-name/assets/css/
+          local-dir: /tmp/repo-name/assets/css/
           server-dir: ./scss/output/
           dangerous-clean-slate: true
