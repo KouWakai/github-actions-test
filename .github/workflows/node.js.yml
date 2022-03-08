@@ -3,7 +3,7 @@ name: node js CI
 on:
   push:
     branches:
-      - 
+      - sass-compile-deploy
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
         uses: gha-utilities/sass-build@v0.4.8
         with:
           source: |
-            src/common.scss
+            /src/common.scss
           destination: |
             /tmp/repo-name/assets/css/common.css
             
