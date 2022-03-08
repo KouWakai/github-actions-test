@@ -18,7 +18,7 @@ jobs:
             submodules: true
 
       - name: Make destination directory for compiled CSS
-        run: mkdir -vp /tmp/assets/css
+        run: mkdir -vp ./out
 
       - name: Compile main.css from main.scss
         uses: gha-utilities/sass-build@v0.4.8
