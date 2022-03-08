@@ -33,6 +33,9 @@ jobs:
       - name: (Test)Check if map exists or not
         run: |
           ls -a
+          echo -----------------
+          cd out
+          ls -a
             
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
