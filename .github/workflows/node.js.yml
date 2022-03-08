@@ -27,6 +27,7 @@ jobs:
             src/common.scss
           destination: |
             /tmp/repo-name/assets/css/common.css
+          source_map: true
             
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
