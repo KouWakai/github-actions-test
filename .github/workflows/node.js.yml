@@ -31,7 +31,9 @@ jobs:
           source_map: true
           
       - name: (Test)Check if map exists or not
-        run: ls -a
+        run: |
+          cd /tmp/assets/css/
+          ls -a
             
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
