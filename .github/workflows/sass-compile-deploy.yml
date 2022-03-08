@@ -19,23 +19,15 @@ jobs:
         uses: gha-utilities/sass-build@v0.4.8
         with:
           source: |
-            src/common.scss
+            assets/scss/common.scss
+            assets/scss/editor.scss
           destination: |
-            ./public/common.css
+            ./out/common.css
+            ./out/editor.css
           sourceMap: true
           sourceMapEmbed: true
           sourceMapContents: true
-          outFile: ./public/common.css
-
-      - name: (Test)Check if map exists or not
-        run: |
-          ls -a
-          echo -----------------
-          cd out
-          ls -a
-          cd ..
-          echo -----------------
-          ls -a
+          outFile: ./public/
 
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -43,5 +35,5 @@ jobs:
           server: ${{ secrets.DEV_FTP_SERVER }}
           username: ${{ secrets.DEV_FTP_USERNAME }}
           password: ${{ secrets.DEV_FTP_PASSWORD }}
-          local-dir: ./public/
+          local-dir: ./out/
           server-dir: /var/www/html/
