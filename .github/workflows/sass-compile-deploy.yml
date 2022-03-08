@@ -15,17 +15,17 @@ jobs:
             submodules: true
       - name: Make destination directory for compiled CSS
         run: mkdir -vp ./out
-      - name: Compile main.css from main.scss
+      - name: Compile common.css from common.scss
         uses: gha-utilities/sass-build@v0.4.8
         with:
           source: |
             src/common.scss
           destination: |
-            ./out/common.css
+            ./public/common.css
           sourceMap: true
           sourceMapEmbed: true
           sourceMapContents: true
-          outFile: ./out/common.css
+          outFile: ./public/common.css
 
       - name: (Test)Check if map exists or not
         run: |
@@ -43,5 +43,5 @@ jobs:
           server: ${{ secrets.DEV_FTP_SERVER }}
           username: ${{ secrets.DEV_FTP_USERNAME }}
           password: ${{ secrets.DEV_FTP_PASSWORD }}
-          local-dir: ./out/
+          local-dir: ./public/
           server-dir: /var/www/html/
