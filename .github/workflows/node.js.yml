@@ -10,17 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-    - run: |
-        npm i
-        npm run build --if-present
-    - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
-      with:
-        server: ${{ secrets.DEV_FTP_SERVER }}
-        username: ${{ secrets.DEV_FTP_USERNAME }}
-        password: ${{ secrets.DEV_FTP_PASSWORD }}
-        local-dir: ./build/
-        dangerous-clean-slate: true
+      - name: Checkout source Git branch
+        uses: actions/checkout@v2
+        with:
+            ref: master
+            fetch-depth: 10
+            submodules: true
+
+      - name: Make destination directory for compiled CSS
+        run: mkdir -vp /tmp/repo-name/assets/css
+
+      - name: Compile main.css from main.scss
+        uses: gha-utilities/sass-build@v0.4.8
+        with:
+          source: |
+            src/common.scss
+          destination: |
+            /tmp/repo-name/assets/css/common.css
+            
+      - name: FTP-Deploy-Action
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.DEV_FTP_SERVER }}
+          username: ${{ secrets.DEV_FTP_USERNAME }}
+          password: ${{ secrets.DEV_FTP_PASSWORD }}
+          local-dir: ./tmp/repo-name/assets/css/common.css
+          server-dir: ./scss/output
+          dangerous-clean-slate: true
