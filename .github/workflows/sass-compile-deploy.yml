@@ -44,4 +44,4 @@ jobs:
           username: ${{ secrets.DEV_FTP_USERNAME }}
           password: ${{ secrets.DEV_FTP_PASSWORD }}
           local-dir: ./out/
-          server-dir: ./scss/output/
+          server-dir: /var/www/html
