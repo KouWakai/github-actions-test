@@ -6,4 +6,4 @@ jobs:
     name: Greeting
     steps:
       - name: Hello
-        uses: KouWakai/GHA-Backlog@v1
+        uses: KouWakai/GHA-Backlog@v1.0
